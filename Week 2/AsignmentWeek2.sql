@@ -84,11 +84,7 @@ GO
 --Make sure that if any of the values are being passed in as NULL, then you want to retain the original value instead of overwriting it with NULL. 
 
 CREATE PROCEDURE UpdateOrderDetails
-    @OrderID INT,
-    @ProductID INT,
-    @UnitPrice DECIMAL(10,2) = NULL,
-    @Quantity INT = NULL,
-    @Discount DECIMAL(5,2) = NULL
+    @OrderID INT, @ProductID INT, @UnitPrice DECIMAL(10,2) = NULL, @Quantity INT = NULL, @Discount DECIMAL(5,2) = NULL
 AS
 BEGIN
     DECLARE @ExistingUnitPrice DECIMAL(10,2), @ExistingQuantity INT;
@@ -130,8 +126,7 @@ GO
 --Parameters are valid if the given order ID appears in the table and if the given product ID appears in that order.
 
 CREATE PROCEDURE DeleteOrderDetails
-    @OrderID INT,
-    @ProductID INT
+    @OrderID INT, @ProductID INT
 AS
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM Sales.SalesOrderDetail WHERE SalesOrderID = @OrderID AND ProductID = @ProductID)
@@ -185,8 +180,7 @@ GO
 
 --
 CREATE VIEW vwCustomerOrdersYesterday AS
-SELECT * 
-FROM vwCustomerOrders 
+SELECT * FROM vwCustomerOrders 
 WHERE CAST(OrderDate AS DATE) = CAST(DATEADD(DAY, -1, GETDATE()) AS DATE);
 GO
 
@@ -196,12 +190,7 @@ GO
 --View should only contain products that are not discontinued.
 
 CREATE VIEW MyProducts AS
-SELECT 
-    p.ProductID, 
-    p.Name AS ProductName, 
-    p.SafetyStockLevel, 
-    p.ListPrice, 
-    c.Name AS CategoryName
+SELECT p.ProductID, p.Name AS ProductName, p.SafetyStockLevel, p.ListPrice, c.Name AS CategoryName
 FROM Production.Product p
 JOIN Production.ProductSubcategory sc ON p.ProductSubcategoryID = sc.ProductSubcategoryID
 JOIN Production.ProductCategory c ON sc.ProductCategoryID = c.ProductCategoryID
@@ -253,24 +242,15 @@ VALUES
 DECLARE @NewOrderID INT = SCOPE_IDENTITY();
 
 EXEC InsertOrderDetails
-    @OrderID = @NewOrderID,
-    @ProductID = 776,
-    @UnitPrice = NULL,
-    @Quantity = 5,
-    @Discount = 0.10;
+    @OrderID = @NewOrderID, @ProductID = 776, @UnitPrice = NULL, @Quantity = 5, @Discount = 0.10;
 
 EXEC UpdateOrderDetails
-    @OrderID = @NewOrderID,
-    @ProductID = 776,
-    @UnitPrice = 25.00,
-    @Quantity = 10,
-    @Discount = NULL;
+    @OrderID = @NewOrderID, @ProductID = 776, @UnitPrice = 25.00, @Quantity = 10, @Discount = NULL;
 
 EXEC GetOrderDetails @OrderID = @NewOrderID;
 
 EXEC DeleteOrderDetails
-    @OrderID = @NewOrderID,
-    @ProductID = 776;
+    @OrderID = @NewOrderID, @ProductID = 776;
 
 SELECT dbo.FormatDateMMDDYYYY(GETDATE()) AS MMDDYYYY_Format;
 SELECT dbo.FormatDateYYYYMMDD(GETDATE()) AS YYYYMMDD_Format;
