@@ -495,7 +495,7 @@ LEFT JOIN (
 ) e ON c.company_code = e.company_code
 ORDER BY c.company_code;
 
---Task 11
+--Task 11: Nmae of students whose best friends are hired with higher salaries than them
 DROP TABLE IF EXISTS Students_11;
 DROP TABLE IF EXISTS Friends_11;
 DROP TABLE IF EXISTS Packages;
@@ -542,7 +542,7 @@ JOIN Packages p2 ON f.Friend_ID = p2.ID
 WHERE p2.Salary > p1.Salary
 ORDER BY p2.Salary;
 
---Task 12
+--Task 12: Ratio of cost of job family by percentage
 DROP TABLE IF EXISTS JobCosts;
 GO
 
@@ -565,7 +565,7 @@ SELECT JobFamily, Location,
 FROM JobCosts
 ORDER BY JobFamily, Location;
 
---Task 13
+--Task 13: Ratio of cost and revenue of a BU month on month
 DROP TABLE IF EXISTS BU_Financials;
 GO
 
@@ -596,7 +596,7 @@ SELECT
 FROM BU_Financials
 ORDER BY BU_Name, Month;
 
---Task 14
+--Task 14: Headcounts of sub band and percentage of headcounts
 DROP TABLE IF EXISTS Employees;
 GO
 
@@ -624,7 +624,7 @@ SELECT
 FROM Employees
 GROUP BY SubBand;
 
---Task 15
+--Task 15: Top 5 employees as per their salaries
 DROP TABLE IF EXISTS Employees;
 GO
 
@@ -652,7 +652,7 @@ FROM (
 ) AS ranked
 WHERE salary_rank = 2;
 
---Task 16
+--Task 16: Swap value of two columns in a table
 DROP TABLE IF EXISTS Employees;
 GO
 
@@ -679,7 +679,7 @@ SELECT SubBand,
 FROM Employees
 GROUP BY SubBand;
 
---Task 17
+--Task 17: Create login for user
 DROP TABLE IF EXISTS Employees;
 GO
 
@@ -713,7 +713,7 @@ SELECT
 FROM Employees
 GROUP BY BU;
 
---Task 18
+--Task 18: Weighted avg cost of employeesmonth on month in a BU
 DROP TABLE IF EXISTS EmployeeCosts;
 GO
 
@@ -742,7 +742,7 @@ FROM EmployeeCosts
 GROUP BY BU, FORMAT([Month], 'yyyy-MM')
 ORDER BY BU, MonthYear;
 
---Task 19
+--Task 19: Finding miscalculation
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS 
 WHERE TABLE_NAME = 'Employees';
 
@@ -769,7 +769,7 @@ SELECT
     ) AS Rounded_Error
 FROM HumanResources.EmployeePayHistory;
 
---Task 20
+--Task 20: copy new data of one table into another table
 DROP TABLE IF EXISTS SourceTable;
 DROP TABLE IF EXISTS TargetTable;
 GO
