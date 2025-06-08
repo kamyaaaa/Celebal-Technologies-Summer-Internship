@@ -788,9 +788,8 @@ CREATE TABLE TargetTable (
 INSERT INTO SourceTable (ID, Name, Salary) VALUES
 (1, 'Samantha', 5000),
 (2, 'Julia', 6000),
-(3, 'Maria', 7000);  -- New data not in TargetTable
+(3, 'Maria', 7000); 
 
--- Data in TargetTable
 INSERT INTO TargetTable (ID, Name, Salary) VALUES
 (1, 'Samantha', 5000),
 (2, 'Julia', 6000);
