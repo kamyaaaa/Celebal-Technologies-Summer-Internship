@@ -1,4 +1,4 @@
-# Write your MySQL query statement below
+-- Write your MySQL query statement below
 SELECT 
     a.visited_on,
     SUM(b.amount) AS amount,
